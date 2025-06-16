@@ -44,7 +44,7 @@ jobs:
           REPO=$(jq -r '.headRepository.name' <<< $JSON)
           BRANCH=$(jq -r '.headRefName' <<< $JSON)
           LINK="https://github.com/$AUTHOR/$REPO/actions/workflows/ci.yml?query=branch%3A$BRANCH"
-          gh pr comment "$PULL_REQUEST" --body "Hi @$USERNAME,"$'\n\n'"$(cat .github/FIRST_PR_OPEN.md | sed 's|CI_URL|$LINK|')"
+          gh pr comment "$PULL_REQUEST" --body "Hi @$USERNAME,"$'\n\n'"$(cat .github/FIRST_PR_OPEN.md | sed "s|CI_URL|$LINK|")"
         env:
           PULL_REQUEST: ${{ github.event.pull_request.number }}
           USERNAME: ${{ github.event.pull_request.user.login }}
